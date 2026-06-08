@@ -1,0 +1,6 @@
+# stops your secret API key from ever being pushed to GitHub.
+.env
+__pycache__/
+*.pyc
+.DS_Store
+venv/
