@@ -28,6 +28,15 @@ def create_summary_table(cur):
         )
     """)
 
+def validate_record(record):
+    """Basic data quality checks"""
+    assert record["temperature"] is not None, "Temperature missing"
+    assert -50 < record["temperature"] < 60, "Temperature out of range"
+    assert 0 <= record["humidity"] <= 100, "Humidity out of range"
+    assert record["city"] is not None, "City missing"
+    print("Validation passed")
+    return True
+
 def transform():
     """Aggregate raw weather data into daily summaries"""
     conn = get_db_connection()

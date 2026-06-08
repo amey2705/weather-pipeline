@@ -3,8 +3,9 @@ import psycopg2
 from datetime import datetime
 import os
 from dotenv import load_dotenv
+from transformation.transform import validate_record
 
-load_dotenv()  # loads values from your .env file
+load_dotenv()
 
 API_KEY = os.getenv("WEATHER_API_KEY")
 DB_HOST = os.getenv("DB_HOST", "localhost")
@@ -16,9 +17,9 @@ def fetch_weather():
     url = (
     f"https://api.openweathermap.org/data/2.5/weather"
     f"?q={CITY}&appid={API_KEY}&units=metric"
-    )
+)
     response = requests.get(url)
-    response.raise_for_status()  # throws error if API call fails
+    response.raise_for_status()
     data = response.json()
 
     return {
@@ -77,4 +78,5 @@ def save_to_db(record):
 
 if __name__ == "__main__":
     record = fetch_weather()
+    validate_record(record)
     save_to_db(record)
