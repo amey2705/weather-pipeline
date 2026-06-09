@@ -1,6 +1,6 @@
-# stops your secret API key from ever being pushed to GitHub.
+venv/
 .env
+.git/
 __pycache__/
 *.pyc
-.DS_Store
-venv/
+.pytest_cache/
